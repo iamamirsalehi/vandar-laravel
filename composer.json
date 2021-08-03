@@ -1,14 +1,23 @@
 {
   "name": "maryamnbyn/vandar-laravel-ipg",
-  "description": "laravel library for vandar gateway",
+  "description": "Laravel Library for Vandar Gateway",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "GPL-3.0-or-later",
   "authors": [
     {
       "name": "Maryam Nabiyan",
-      "email": "maryam.nbyn@gmail.com"
+      "email": "maryam.nbyn@gmail.com",
+      "role": "Developer"
+    },
+    {
+      "name": "Mohammad H. Mazalahi",
+      "email": "mohammadhoseinmazalahi@gmail.com",
+      "role": "Developer"
     }
   ],
+  "support": {
+    "docs": "https://docs.vandar.io"
+  },
   "scripts": {
     "tests": "vendor/bin/phpunit"
   },
