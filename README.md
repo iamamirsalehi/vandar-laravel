@@ -1,49 +1,50 @@
-vandar-laravel
-Latest Stable Version Total Downloads CircleCI Build License
+# Vandar Laravel Package
+This Laravel package allows you to connect to Vandar payment services. See vandar.io for more info.
 
-laravel library for vandar gateway
-
-Installation
-
-step 1
-
-run this command :
+## Installation
+This package can be installed through Laravel:
+```bash
 composer require maryamnbyn/vandar-laravel
-
-step 2
-
-add this to config/services.php
-
+```
+Add vandar configuration to `config/services.php`:
+```php
  'vandar' => [
         'api' => 'your api key',
         'test' => false
     ]
-you can find your api in vandar dashboard.
+```
+You can get your api key at Vandar Dashboard
 
-Usage
-
-Before you begin, add this code to the top of the class
-
+## Usage
+In every class where Vandar is used, you need to use the Vandar facade:
+```php
 use Vandar\Laravel\Facade\Vandar;
-Then, you most send payment request like this
+```
+Then, the payment requests can be sent like this:
+```php
+$result = Vandar::request($amount, $callback, $mobile = null, $factorNumber = null, $description = null);
+```
+Further information on the responses is available on [Vandar Documentation](https://docs.vandar.io), but keep in mind that you need to store the `$result['token']` to verify the payment later on.
 
-$result = Vandar::request($amount,$callback, $mobile = null, $factorNumber = null, $description = null);
-and save $result['token'] for verify payment.
-now you can redirect user to gateway
-
-Vandar::redirect();
-//or 
-Vandar::redirectUrl();
-After user made payment, vandar redirect user to $callback with a token in url. you can verify payment by pass token to verify method like this
-
-$token=$_GET['token'];
+After this, you may redirect the user to the payment service using one of these methods, note that token is optional:
+```php
+Vandar::redirect($token);
+Vandar::redirectUrl($token);
+```
+After the user made the payment, Vandar will redirect the user to the callback specified above with a token in url. you can verify payment by passing the token to the `verify` method:
+```php
+$token=$_GET['token']; // You can also use $request->get('token') in the scope of a laravel controller
 $result = Vandar::verify($token);
+```
 
 for get info of transaction you can make requestInfo method and send token for that then you can get information ; <br>
-
+To get updates on any transactions you may have created, you may use the `requestInfo` method along with the token you stored:
+```php
 $result = Vandar::requestInfo($token);
+```
 
-you can read more about responses and api here.
-bug report
+## Contribution
+Pull-requests fixing bugs or adding to the documentation are very appreciated!
 
-if you find a bug add issue
+## License
+This project is licensed under the GPL-3, see LICENSE for more information.
