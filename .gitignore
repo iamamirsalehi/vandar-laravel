@@ -1,4 +1,5 @@
-vendor/
 .idea/
+.vscode/
+vendor/
 log/
 .phpunit.result.cache
